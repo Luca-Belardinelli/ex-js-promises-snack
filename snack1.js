@@ -27,3 +27,25 @@ getPostTitle(12)
 // Crea una funzione getPost(id) che recupera l'intero post.
 // Concatena una seconda chiamata che aggiunge una proprietà user che contiene i dati dell'autore,
 // recuperati dalla chiamata https://dummyjson.com/users/{post.userId}.
+
+
+const getPost = id => {
+    const promessa = new Promise((resolve, reject) => {
+        fetch(`https://dummyjson.com/posts/${id}`)
+            .then(response => response.json())
+            .then(post => {
+                fetch(`https://dummyjson.com/users/${post.userId}`)
+                    .then(response => response.json())
+                    .then(user => resolve({
+                        ...post,
+                        user
+                    }))
+            })
+            .catch(reject)
+    });
+    return promessa;
+}
+
+getPost(12)
+    .then(post => console.log("post:", post))
+    .catch(error => console.error(error));
