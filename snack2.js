@@ -5,17 +5,26 @@
 
 
 
+function lanciaDado() {
+    return new Promise((resolve, reject) => {
+        console.log("Sto lanciando il dado...");
+        setTimeout(() => {
+            const numero = Math.floor(Math.random() * 10) + 1;
+            if (numero <= 2) {
+                reject("Il dado è tratto")
+            } else {
+                const dado = Math.floor(Math.random() * 6) + 1;
+                resolve(dado)
+            }
+        }, 3000)
+    })
+}
 
 
 
-
-
-
-
-
-
-
-
+lanciaDado()
+    .then(dado => console.log("Questo è il numero:", dado))
+    .catch(error => console.log(error))
 
 
 
