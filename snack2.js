@@ -62,5 +62,10 @@ function creaLanciaDado() {
 const lanciaDadoConMemoria = creaLanciaDado();
 
 lanciaDadoConMemoria()
-    .then(dado => console.log("Questo è il numero:", dado))
+    .then(dado => {
+        console.log("Questo è il numero:", dado)
+        lanciaDadoConMemoria()
+            .then(dado => console.log("Questo è il numero:", dado))
+            .catch(error => console.log(error))
+    })
     .catch(error => console.log(error))
